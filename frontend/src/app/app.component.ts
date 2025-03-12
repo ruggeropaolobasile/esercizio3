@@ -8,6 +8,4 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./app.component.css'],
   imports: [RouterModule] // ✅ IMPORTA RouterModule per riconoscere <router-outlet>
 })
-export class AppComponent {
-  title = 'auto-management';
-  }
+export class AppComponent { }
