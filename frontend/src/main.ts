@@ -4,7 +4,6 @@ import { importProvidersFrom } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app/app.component';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';  // ✅ Aggiunto
 
 const routes: Routes = [ // ✅ Usa Routes (non Route[])
   { 

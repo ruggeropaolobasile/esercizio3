@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 interface Cliente {
   id: number;
@@ -23,7 +24,7 @@ interface Automobile {
   templateUrl: './cliente.component.html',
   standalone: true,
   styleUrls: ['./cliente.component.css'],
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule,HttpClientModule]
 })
 export class ClienteComponent implements OnInit {
   clienti: Cliente[] = [];
