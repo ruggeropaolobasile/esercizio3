@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
   
   // Se l'id_cliente è fornito, filtra le automobili per quel cliente
   if (idCliente) {
+    console.log(`🔍 Fetching automobiles for Cliente ID: ${idCliente}`);
     Automobile.getAll((err, rows) => {
       if (err) {
         return res.status(500).json({ error: err });
@@ -30,6 +31,7 @@ router.get('/', (req, res) => {
 
 // Aggiungi una nuova automobile
 router.post('/', (req, res) => {
+  
   const automobile = req.body;
   Automobile.add(automobile, (err, result) => {
     if (err) {
@@ -42,6 +44,8 @@ router.post('/', (req, res) => {
 // Aggiorna un'automobile esistente
 router.put('/:id', (req, res) => {
   const id = req.params.id;
+  console.log(`🔍 Fetching automobiles for Cliente ID: ${idCliente}`);
+ 
   const automobile = req.body;
   Automobile.update(id, automobile, (err, result) => {
     if (err) {

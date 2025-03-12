@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router'; // ✅ Import Router
 
 interface Cliente {
   id: number;
@@ -35,8 +36,11 @@ export class ClienteComponent implements OnInit {
   private apiUrl = 'http://localhost:3000/api/clienti'; // URL del backend
   private automobiliUrl = 'http://localhost:3000/api/automobili'; // URL delle automobili
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private router: Router) { }
 
+  goToAutomobili() {
+    this.router.navigate(['/automobili']); // ✅ Navigate properly
+  }
   ngOnInit(): void {
     this.getClienti();
     this.getAutomobili();
@@ -117,6 +121,15 @@ export class ClienteComponent implements OnInit {
   }
 
   selezionaAutomobile(cliente: Cliente): void {
+    console.log("🔍 Cliente selezionato:", cliente); // ✅ Debug log
+    
+    // Debug: Check if 'automobili' array has data
+    console.log("🚗 Automobili disponibili:", this.automobili);
+  
+    // Filter the automobili by cliente.id
     this.automobiliVisibili = this.automobili.filter(auto => auto.clienteId === cliente.id);
+  
+    // Debug: Check if the filtered list has data
+    console.log("✅ Automobili del cliente selezionato:", this.automobiliVisibili);
   }
 }

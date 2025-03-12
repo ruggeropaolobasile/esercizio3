@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 interface Automobile {
@@ -14,10 +15,10 @@ interface Automobile {
 
 @Component({
   selector: 'app-automobile',
-  templateUrl: './automobile.component.html',
+  templateUrl: './automobili.component.html',
   standalone: true,
-  styleUrls: ['./automobile.component.css'],
-  imports: [CommonModule, FormsModule]
+  styleUrls: ['./automobili.component.css'],
+  imports: [CommonModule, FormsModule,HttpClientModule]
 })
 export class AutomobileComponent implements OnInit {
   automobili: Automobile[] = [];
@@ -30,14 +31,15 @@ export class AutomobileComponent implements OnInit {
   }
 
   getAutomobili(): void {
-    this.http.get<Automobile[]>(this.automobiliUrl)
-      .pipe(
-        catchError((error) => {
-          console.error('Errore nel recupero delle automobili:', error);
-          return of([]);
-        })
-      )
-      .subscribe((data) => (this.automobili = data));
+    this.http.get<Automobile[]>(this.automobiliUrl).pipe(
+      catchError((error) => {
+        console.error("❌ Errore nel recupero delle automobili:", error);
+        return of([]); // Return an empty array on error
+      })
+    ).subscribe((data) => {
+      console.log("🚗 Automobili caricate dal server:", data); // ✅ Debug log
+      this.automobili = data;
+    });
   }
 }
 

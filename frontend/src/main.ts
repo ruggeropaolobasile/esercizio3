@@ -5,16 +5,25 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app/app.component';
 import { RouterModule } from '@angular/router';
 
-const routes: Routes = [ // ✅ Usa Routes (non Route[])
+const routes: Routes = [ 
   { 
     path: 'clienti', 
     loadComponent: () => import('./app/components/cliente/cliente.component')
       .then(m => m.ClienteComponent) 
   },
   { 
+    path: 'automobili',  // ✅ Add missing route
+    loadComponent: () => import('./app/components/automobili/automobili.component')
+      .then(m => m.AutomobileComponent) 
+  },
+  { 
     path: '', 
     redirectTo: 'clienti', 
-    pathMatch: 'full'  // ✅ Assicurati che sia "full"
+    pathMatch: 'full'  
+  },
+  { 
+    path: '**', 
+    redirectTo: 'clienti'  // ✅ Handle invalid routes
   }
 ];
 
